@@ -1,0 +1,244 @@
+:root {
+    --primary: #0a2540;
+    --accent: #00d4ff;
+    --accent-green: #2e7d32;
+    --bg: #f4f6f8;
+    --text: #333;
+    --card-bg: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header & Navegação */
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+header h1 a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+}
+
+nav a:hover, nav a.active {
+    color: var(--accent);
+}
+
+/* Conteúdo Principal */
+main {
+    flex: 1;
+}
+
+/* Banner Hero */
+.hero {
+    background: linear-gradient(rgba(10,37,64,0.7), rgba(10,37,64,0.7)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover;
+    height: 300px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.hero h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-title {
+    text-align: center;
+    margin: 2.5rem 0 1.5rem;
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+/* Grids e Animações de Cards */
+.services-grid, .destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 0 5% 3rem;
+}
+
+.service-card, .city-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover, .city-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.service-card {
+    padding: 1.5rem;
+    text-align: center;
+    border-top: 4px solid var(--accent);
+}
+
+.city-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.city-card:hover img {
+    transform: scale(1.03);
+}
+
+.city-info {
+    padding: 1.5rem;
+}
+
+/* Botões e Preços */
+.price-tag {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-green);
+    margin: 1rem 0;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+    background-color: #0d3861;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-green {
+    background-color: var(--accent-green);
+}
+
+.btn-green:hover {
+    background-color: #236327;
+}
+
+/* Containers Especiais */
+.page-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.checkout-form, .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Rodapé */
+footer {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    font-size: 0.95rem;
+}
+
+footer p {
+    margin: 0.3rem 0;
+}
+
+.edu-notice {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-top: 0.5rem;
+}

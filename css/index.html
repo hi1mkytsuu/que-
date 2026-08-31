@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - American Dreams Travel</title>
+    <style>
+        :root {
+            --primary: #0a2540;
+            --accent: #00d4ff;
+            --accent-green: #2e7d32;
+            --bg: #f4f6f8;
+            --text: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cabeçalho e Navegação */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease-in-out;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Imagem Principal (Hero) */
+        .hero {
+            background: linear-gradient(rgba(10,37,64,0.65), rgba(10,37,64,0.65)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover no-repeat;
+            height: 380px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+        }
+
+        /* Seção Sobre a Agência (3 Parágrafos) */
+        .about-section {
+            max-width: 900px;
+            margin: 3rem auto 1rem;
+            padding: 0 1.5rem;
+        }
+
+        .about-section h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .about-section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: #444;
+            text-align: justify;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        /* Lista de Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 0 5% 2rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 4px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Destinos em Destaque */
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 0 5% 3rem;
+        }
+
+        .city-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .city-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .city-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .city-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .city-info {
+            padding: 1.5rem;
+        }
+
+        .price-tag {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-green);
+            margin: 1rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #0d3861;
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+        }
+
+        footer p {
+            margin: 0.3rem 0;
+        }
+
+        .edu-notice {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho com Nome da Agência e Navegação -->
+    <header>
+        <h1><a href="index.html">American Dreams Travel</a></h1>
+        <nav>
+            <a href="index.html" class="active">Início</a>
+            <a href="#destinos">Destinos</a>
+            <a href="hoteis.html">Hotéis</a>
+            <a href="pacotes.html">Pacotes</a>
+            <a href="pagamento.html">Reserva</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Imagem Principal / Hero Banner -->
+        <section class="hero">
+            <h2>American Dreams Travel</h2>
+            <p>Sua agência especialista em transformar sonhos em viagens inesquecíveis pelo continente americano.</p>
+        </section>
+
+        <!-- Apresentação da Agência (3 Parágrafos) -->
+        <section class="about-section">
+            <h2>Bem-vindo à American Dreams Travel</h2>
+            <p>
+                A <strong>American Dreams Travel</strong> nasceu com a missão de tornar a experiência de viajar para o exterior algo simples, seguro e completamente inesquecível. Desde a nossa fundação, nos dedicamos a planejar roteiros personalizados que atendem tanto famílias em busca de diversão quanto viajantes corporativos ou aventureiros de primeira viagem.
+            </p>
+            <p>
+                Nossa equipe é formada por especialistas experientes que conhecem cada detalhe das principais metrópoles, parques temáticos e praias paradisíacas dos Estados Unidos. Oferecemos suporte completo em todas as etapas da sua jornada, desde a escolha das passagens aéreas até a seleção dos melhores hotéis e agendamento de atrações turísticas.
+            </p>
+            <p>
+                Com a American Dreams Travel, você não compra apenas uma viagem; você garante tranquilidade, comodidade e momentos mágicos com total assistência 24 horas. Conte conosco para realizar o seu sonho americano com as melhores condições e tarifas exclusivas do mercado.
+            </p>
+        </section>
+
+        <!-- Lista de Serviços Oferecidos -->
+        <h2 class="section-title" id="servicos">Nossos Serviços</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>✈️ Passagens Aéreas</h3>
+                <p>Emissão de voos nacionais e internacionais com tarifas exclusivas e melhores horários.</p>
+            </div>
+            <div class="service-card">
+                <h3>🏨 Hotéis & Resorts</h3>
+                <p>Reservas em acomodações de 3 a 5 estrelas selecionadas a dedo nas melhores localizações.</p>
+            </div>
+            <div class="service-card">
+                <h3>🎟️ Pacotes Completos</h3>
+                <p>Combos práticos com aéreo, hospedagem e ingressos para os principais parques e shows.</p>
+            </div>
+            <div class="service-card">
+                <h3>📑 Assessoria de Visto</h3>
+                <p>Suporte passo a passo no preenchimento do formulário e agendamento da entrevista consular.</p>
+            </div>
+            <div class="service-card">
+                <h3>🚗 Aluguel de Veículos</h3>
+                <p>Carros econômicos, SUVs e modelos de luxo com seguro total sem franquia.</p>
+            </div>
+            <div class="service-card">
+                <h3>🛡️ Seguro Viagem</h3>
+                <p>Planos de assistência médica e odontológica com atendimento 24 horas em português.</p>
+            </div>
+        </div>
+
+        <!-- Seção de Destinos em Destaque com Links para as Páginas -->
+        <h2 class="section-title" id="destinos">Destinos em Destaque</h2>
+        <div class="destinations-grid">
+            <div class="city-card">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9" alt="Nova York">
+                <div class="city-info">
+                    <h3>Nova York</h3>
+                    <p>Espetáculos da Broadway, Times Square e parques icônicos.</p>
+                    <div class="price-tag">A partir de R$ 8.500 / pessoa</div>
+                    <a href="dest-nova-york.html" class="btn">Ver Roteiro & Detalhes</a>
+                </div>
+            </div>
+
+            <div class="city-card">
+                <img src="https://images.unsplash.com/photo-1597466599360-3b9775841aec?auto=format&fit=crop&w=1000&q=80" alt="Orlando">
+                <div class="city-info">
+                    <h3>Orlando</h3>
+                    <p>A magia dos maiores parques temáticos do planeta.</p>
+                    <div class="price-tag">A partir de R$ 9.200 / pessoa</div>
+                    <a href="dest-orlando.html" class="btn">Ver Roteiro & Detalhes</a>
+                </div>
+            </div>
+
+            <div class="city-card">
+                <img src="https://images.unsplash.com/photo-1506966953602-c20cc11f75e3" alt="Miami">
+                <div class="city-info">
+                    <h3>Miami</h3>
+                    <p>Praias paradisíacas, vida noturna e excelentes compras.</p>
+                    <div class="price-tag">A partir de R$ 7.800 / pessoa</div>
+                    <a href="dest-miami.html" class="btn">Ver Roteiro & Detalhes</a>
+                </div>
+            </div>
+
+            <div class="city-card">
+                <img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0" alt="Los Angeles">
+                <div class="city-info">
+                    <h3>Los Angeles</h3>
+                    <p>O melhor do cinema mundial e as praias da Califórnia.</p>
+                    <div class="price-tag">A partir de R$ 8.900 / pessoa</div>
+                    <a href="dest-los-angeles.html" class="btn">Ver Roteiro & Detalhes</a>
+                </div>
+            </div>
+
+            <div class="city-card">
+                <img src="https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d" alt="Las Vegas">
+                <div class="city-info">
+                    <h3>Las Vegas</h3>
+                    <p>Cassinos de luxo, espetáculos e vida noturna agitada.</p>
+                    <div class="price-tag">A partir de R$ 7.500 / pessoa</div>
+                    <a href="dest-las-vegas.html" class="btn">Ver Roteiro & Detalhes</a>
+                </div>
+            </div>
+
+            <div class="city-card">
+                <img src="https://images.unsplash.com/photo-1617581629397-a72507c3de9e" alt="Washington DC">
+                <div class="city-info">
+                    <h3>Washington DC</h3>
+                    <p>Monumentos históricos e o complexo de museus Smithsonian.</p>
+                    <div class="price-tag">A partir de R$ 7.200 / pessoa</div>
+                    <a href="dest-washington-dc.html" class="btn">Ver Roteiro & Detalhes</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé Completo -->
+    <footer>
+        <p>&copy; 2026 <strong>American Dreams Travel</strong>. Desenvolvido por <strong>Flávio Fernandes</strong> e <strong>Renan</strong>.</p>
+        <p class="edu-notice">Este site foi criado exclusivamente para fins educacionais.</p>
+    </footer>
+
+    <script>
+        // Função utilitária para capturar cliques nos botões de reserva
+        function processarPagamento(event) {
+            event.preventDefault();
+            alert('Reserva efetuada com sucesso! A American Dreams Travel enviará a confirmação e os vouchers para o seu e-mail.');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

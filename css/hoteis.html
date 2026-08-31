@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotéis - American Dreams Travel</title>
+    <style>
+        :root {
+            --primary: #0a2540;
+            --accent: #00d4ff;
+            --accent-green: #2e7d32;
+            --bg: #f4f6f8;
+            --text: #333;
+            --card-bg: #ffffff;
+            --star-color: #ffb400;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* Grid de Hotéis */
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .hotel-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .hotel-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .hotel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .hotel-name {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .city-badge {
+            background: #eef7ff;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stars {
+            color: var(--star-color);
+            font-size: 1.1rem;
+        }
+
+        .hotel-desc {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .hotel-times {
+            background: #f9f9f9;
+            padding: 0.6rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .services-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-tag {
+            background: #e8f5e9;
+            color: var(--accent-green);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+        }
+
+        .hotel-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        .price span {
+            font-size: 0.8rem;
+            color: #777;
+            font-weight: normal;
+        }
+
+        .btn-reserve {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn-reserve:hover {
+            background-color: #0d3861;
+        }
+
+        /* Tabela Comparativa */
+        .table-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .table-section h3 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+        }
+
+        .edu-notice {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="index.html">American Dreams Travel</a></h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="index.html#destinos">Destinos</a>
+            <a href="hoteis.html" class="active">Hotéis</a>
+            <a href="pacotes.html">Pacotes</a>
+            <a href="pagamento.html">Reserva</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title">Hospedagens Selecionadas</h2>
+        <p class="page-subtitle">Confira as melhores opções de hotéis e resorts para a sua viagem</p>
+
+        <!-- Lista dos 8 Hotéis Fictícios -->
+        <div class="hotels-grid">
+            
+            <!-- Hotel 1 -->
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Manhattan Empire Suites">
+                <div class="hotel-body">
+                    <span class="city-badge">Nova York (NY)</span>
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">Manhattan Empire Suites</h3>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="hotel-desc">Localizado no coração de Midtown, com vista panorâmica para o skyline e próximo aos musicais da Broadway.</p>
+                    <div class="hotel-times">
+                        <strong>Check-in:</strong> 15:00 | <strong>Check-out:</strong> 11:00
+                    </div>
+                    <div class="services-list">
+                        <span class="service-tag">Wi-Fi</span>
+                        <span class="service-tag">Academia</span>
+                        <span class="service-tag">Restaurante</span>
+                        <span class="service-tag">Recepção 24h</span>
+                        <span class="service-tag">Serviço de Quarto</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price">R$ 1.250 <span>/ noite</span></div>
+                        <a href="pagamento.html?hotel=Manhattan Empire Suites&preco=R$ 1.250" class="btn-reserve">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 2 -->
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80" alt="Central Park Boutique Hotel">
+                <div class="hotel-body">
+                    <span class="city-badge">Nova York (NY)</span>
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">Central Park Boutique Hotel</h3>
+                        <div class="stars">★★★★☆</div>
+                    </div>
+                    <p class="hotel-desc">Aconchegante hotel boutique localizado a poucos passos do Central Park, ideal para quem busca charme e conforto.</p>
+                    <div class="hotel-times">
+                        <strong>Check-in:</strong> 14:00 | <strong>Check-out:</strong> 11:00
+                    </div>
+                    <div class="services-list">
+                        <span class="service-tag">Wi-Fi</span>
+                        <span class="service-tag">Café da Manhã</span>
+                        <span class="service-tag">Recepção 24h</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price">R$ 980 <span>/ noite</span></div>
+                        <a href="pagamento.html?hotel=Central Park Boutique Hotel&preco=R$ 980" class="btn-reserve">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 3 -->
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Grand Magic Resort">
+                <div class="hotel-body">
+                    <span class="city-badge">Orlando (FL)</span>
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">Grand Magic Resort</h3>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="hotel-desc">Resort completo com parques aquáticos internos e transporte gratuito para os principais parques temáticos da cidade.</p>
+                    <div class="hotel-times">
+                        <strong>Check-in:</strong> 16:00 | <strong>Check-out:</strong> 10:00
+                    </div>
+                    <div class="services-list">
+                        <span class="service-tag">Wi-Fi</span>
+                        <span class="service-tag">Café da Manhã</span>
+                        <span class="service-tag">Piscina</span>
+                        <span class="service-tag">Academia</span>
+                        <span class="service-tag">Estacionamento</span>
+                        <span class="service-tag">Restaurante</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price">R$ 1.100 <span>/ noite</span></div>
+                        <a href="pagamento.html?hotel=Grand Magic Resort&preco=R$ 1.100" class="btn-reserve">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 4 -->
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80" alt="Sun & Fun Palms Inn">
+                <div class="hotel-body">
+                    <span class="city-badge">Orlando (FL)</span>
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">Sun & Fun Palms Inn</h3>
+                        <div class="stars">★★★☆☆</div>
+                    </div>
+                    <p class="hotel-desc">Opção econômica e confortável com excelente localização próximo à International Drive e aos outlets.</p>
+                    <div class="hotel-times">
+                        <strong>Check-in:</strong> 15:00 | <strong>Check-out:</strong> 11:00
+                    </div>
+                    <div class="services-list">
+                        <span class="service-tag">Wi-Fi</span>
+                        <span class="service-tag">Piscina</span>
+                        <span class="service-tag">Estacionamento</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price">R$ 520 <span>/ noite</span></div>
+                        <a href="pagamento.html?hotel=Sun & Fun Palms Inn&preco=R$ 520" class="btn-reserve">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 5 -->
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80" alt="Ocean Drive Beach Resort">
+                <div class="hotel-body">
+                    <span class="city-badge">Miami (FL)</span>
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">Ocean Drive Beach Resort</h3>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="hotel-desc">Resort luxuoso pé na areia em South Beach, com beach club privativo e restaurante premiado.</p>
+                    <div class="hotel-times">
+                        <strong>Check-in:</strong> 15:00 | <strong>Check-out:</strong> 12:00
+                    </div>
+                    <div class="services-list">
+                        <span class="service-tag">Wi-Fi</span>
+                        <span class="service-tag">Piscina</span>
+                        <span class="service-tag">Academia</span>
+                        <span class="service-tag">Restaurante</span>
+                        <span class="service-tag">Serviço de Quarto</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price">R$ 1.450 <span>/ noite</span></div>
+                        <a href="pagamento.html?hotel=Ocean Drive Beach Resort&preco=R$ 1.450" class="btn-reserve">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 6 -->
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="Hollywood Sunset Hotel">
+                <div class="hotel-body">
+                    <span class="city-badge">Los Angeles (CA)</span>
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">Hollywood Sunset Hotel</h3>
+                        <div class="stars">★★★★☆</div>
+                    </div>
+                    <p class="hotel-desc">Com vista para a Sunset Boulevard, oferece piscina na cobertura e ambiente moderno próximo aos estúdios.</p>
+                    <div class="hotel-times">
+                        <strong>Check-in:</strong> 15:00 | <strong>Check-out:</strong> 11:00
+                    </div>
+                    <div class="services-list">
+                        <span class="service-tag">Wi-Fi</span>
+                        <span class="service-tag">Café da Manhã</span>
+                        <span class="service-tag">Piscina</span>
+                        <span class="service-tag">Estacionamento</span>
+                        <span class="service-tag">Recepção 24h</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price">R$ 1.150 <span>/ noite</span></div>
+                        <a href="pagamento.html?hotel=Hollywood Sunset Hotel&preco=R$ 1.150" class="btn-reserve">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 7 -->
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="The Neon Strip Palace">
+                <div class="hotel-body">
+                    <span class="city-badge">Las Vegas (NV)</span>
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">The Neon Strip Palace</h3>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="hotel-desc">Hotel e cassino de alto padrão localizado no centro da Strip, com shows exclusivos e spas luxuosos.</p>
+                    <div class="hotel-times">
+                        <strong>Check-in:</strong> 15:00 | <strong>Check-out:</strong> 11:00
+                    </div>
+                    <div class="services-list">
+                        <span class="service-tag">Wi-Fi</span>
+                        <span class="service-tag">Piscina</span>
+                        <span class="service-tag">Academia</span>
+                        <span class="service-tag">Restaurante</span>
+                        <span class="service-tag">Recepção 24h</span>
+                        <span class="service-tag">Serviço de Quarto</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price">R$ 890 <span>/ noite</span></div>
+                        <a href="pagamento.html?hotel=The Neon Strip Palace&preco=R$ 890" class="btn-reserve">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 8 -->
+            <div class="hotel-card">
+                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=80" alt="Capitol Heritage Plaza">
+                <div class="hotel-body">
+                    <span class="city-badge">Washington DC (DC)</span>
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">Capitol Heritage Plaza</h3>
+                        <div class="stars">★★★★☆</div>
+                    </div>
+                    <p class="hotel-desc">Hotel clássico e elegante a poucos passos dos museus Smithsonian e do National Mall.</p>
+                    <div class="hotel-times">
+                        <strong>Check-in:</strong> 14:00 | <strong>Check-out:</strong> 12:00
+                    </div>
+                    <div class="services-list">
+                        <span class="service-tag">Wi-Fi</span>
+                        <span class="service-tag">Café da Manhã</span>
+                        <span class="service-tag">Academia</span>
+                        <span class="service-tag">Recepção 24h</span>
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="price">R$ 920 <span>/ noite</span></div>
+                        <a href="pagamento.html?hotel=Capitol Heritage Plaza&preco=R$ 920" class="btn-reserve">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Tabela Comparativa de Hotéis -->
+        <section class="table-section">
+            <h3>Tabela Comparativa de Hotéis</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hotel</th>
+                            <th>Cidade</th>
+                            <th>Estrelas</th>
+                            <th>Diária</th>
+                            <th>Check-in / Check-out</th>
+                            <th>Principais Serviços</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Manhattan Empire Suites</strong></td>
+                            <td>Nova York (NY)</td>
+                            <td>5 ★</td>
+                            <td>R$ 1.250</td>
+                            <td>15:00 / 11:00</td>
+                            <td>Wi-Fi, Academia, Restaurante, Recepção 24h, Serviço de Quarto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Central Park Boutique Hotel</strong></td>
+                            <td>Nova York (NY)</td>
+                            <td>4 ★</td>
+                            <td>R$ 980</td>
+                            <td>14:00 / 11:00</td>
+                            <td>Wi-Fi, Café da Manhã, Recepção 24h</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grand Magic Resort</strong></td>
+                            <td>Orlando (FL)</td>
+                            <td>5 ★</td>
+                            <td>R$ 1.100</td>
+                            <td>16:00 / 10:00</td>
+                            <td>Wi-Fi, Café da Manhã, Piscina, Academia, Estacionamento, Restaurante</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sun & Fun Palms Inn</strong></td>
+                            <td>Orlando (FL)</td>
+                            <td>3 ★</td>
+                            <td>R$ 520</td>
+                            <td>15:00 / 11:00</td>
+                            <td>Wi-Fi, Piscina, Estacionamento</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ocean Drive Beach Resort</strong></td>
+                            <td>Miami (FL)</td>
+                            <td>5 ★</td>
+                            <td>R$ 1.450</td>
+                            <td>15:00 / 12:00</td>
+                            <td>Wi-Fi, Piscina, Academia, Restaurante, Serviço de Quarto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hollywood Sunset Hotel</strong></td>
+                            <td>Los Angeles (CA)</td>
+                            <td>4 ★</td>
+                            <td>R$ 1.150</td>
+                            <td>15:00 / 11:00</td>
+                            <td>Wi-Fi, Café da Manhã, Piscina, Estacionamento, Recepção 24h</td>
+                        </tr>
+                        <tr>
+                            <td><strong>The Neon Strip Palace</strong></td>
+                            <td>Las Vegas (NV)</td>
+                            <td>5 ★</td>
+                            <td>R$ 890</td>
+                            <td>15:00 / 11:00</td>
+                            <td>Wi-Fi, Piscina, Academia, Restaurante, Recepção 24h, Serviço de Quarto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Capitol Heritage Plaza</strong></td>
+                            <td>Washington DC (DC)</td>
+                            <td>4 ★</td>
+                            <td>R$ 920</td>
+                            <td>14:00 / 12:00</td>
+                            <td>Wi-Fi, Café da Manhã, Academia, Recepção 24h</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <strong>American Dreams Travel</strong>. Desenvolvido por <strong>Flávio Fernandes</strong> e <strong>Renan</strong>.</p>
+        <p class="edu-notice">Este site foi criado exclusivamente para fins educacionais.</p>
+    </footer>
+
+</body>
+</html>

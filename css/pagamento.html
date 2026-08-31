@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva & Pagamento - American Dreams Travel</title>
+    <style>
+        :root {
+            --primary: #0a2540;
+            --accent: #00d4ff;
+            --accent-green: #2e7d32;
+            --bg: #f4f6f8;
+            --text: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* Formulário */
+        .booking-form-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .form-section-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: #444;
+        }
+
+        input, select, textarea {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #236327;
+        }
+
+        /* Mensagem de Sucesso */
+        .success-message {
+            display: none;
+            background: #e8f5e9;
+            color: var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #c8e6c9;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+        }
+
+        .edu-notice {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="index.html">American Dreams Travel</a></h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="index.html#destinos">Destinos</a>
+            <a href="hoteis.html">Hotéis</a>
+            <a href="pacotes.html">Pacotes</a>
+            <a href="pagamento.html" class="active">Reserva</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title">Formulário de Reserva</h2>
+        <p class="page-subtitle">Preencha os dados abaixo para garantir a sua viagem com a gente</p>
+
+        <div class="booking-form-card">
+            <form id="reservationForm">
+                
+                <!-- Dados Pessoais -->
+                <h3 class="form-section-title">1. Dados Pessoais</h3>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="nome">Nome Completo *</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone / WhatsApp *</label>
+                        <input type="tel" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cidade">Sua Cidade *</label>
+                        <input type="text" id="cidade" name="cidade" required placeholder="Ex: São Paulo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Seu Estado *</label>
+                        <select id="estado" name="estado" required>
+                            <option value="">Selecione...</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dados da Viagem -->
+                <h3 class="form-section-title">2. Detalhes da Viagem</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="destino">Cidade de Destino *</label>
+                        <select id="destino" name="destino" required>
+                            <option value="">Selecione o destino...</option>
+                            <option value="Nova York">Nova York (NY)</option>
+                            <option value="Orlando">Orlando (FL)</option>
+                            <option value="Miami">Miami (FL)</option>
+                            <option value="Los Angeles">Los Angeles (CA)</option>
+                            <option value="Las Vegas">Las Vegas (NV)</option>
+                            <option value="Washington DC">Washington DC (DC)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hotel">Hotel Preferencial</label>
+                        <select id="hotel" name="hotel">
+                            <option value="Nenhum especifico">Nenhum específico</option>
+                            <option value="Manhattan Empire Suites">Manhattan Empire Suites (Nova York)</option>
+                            <option value="Central Park Boutique Hotel">Central Park Boutique Hotel (Nova York)</option>
+                            <option value="Grand Magic Resort">Grand Magic Resort (Orlando)</option>
+                            <option value="Sun & Fun Palms Inn">Sun & Fun Palms Inn (Orlando)</option>
+                            <option value="Ocean Drive Beach Resort">Ocean Drive Beach Resort (Miami)</option>
+                            <option value="Hollywood Sunset Hotel">Hollywood Sunset Hotel (Los Angeles)</option>
+                            <option value="The Neon Strip Palace">The Neon Strip Palace (Las Vegas)</option>
+                            <option value="Capitol Heritage Plaza">Capitol Heritage Plaza (Washington DC)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="pacote">Pacote Turístico</label>
+                        <select id="pacote" name="pacote">
+                            <option value="Nenhum / Apenas Hotel">Sem pacote (Apenas Hotel / Personalizado)</option>
+                            <option value="Luzes & Espetáculos em Manhattan">Luzes & Espetáculos em Manhattan (Nova York)</option>
+                            <option value="Magia & Diversão nos Parques">Magia & Diversão nos Parques (Orlando)</option>
+                            <option value="Praias, Arte & Compras em Miami">Praias, Arte & Compras em Miami (Miami)</option>
+                            <option value="Estrelas de Hollywood & Costa Californiana">Estrelas de Hollywood & Costa Californiana (Los Angeles)</option>
+                            <option value="Luzes, Cassinos & Grand Canyon">Luzes, Cassinos & Grand Canyon (Las Vegas)</option>
+                            <option value="História & Monumentos Capitais">História & Monumentos Capitais (Washington DC)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataIda">Data de Ida *</label>
+                        <input type="date" id="dataIda" name="dataIda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataVolta">Data de Volta *</label>
+                        <input type="date" id="dataVolta" name="dataVolta" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adultos">Quantidade de Adultos *</label>
+                        <input type="number" id="adultos" name="adultos" min="1" max="10" value="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="criancas">Quantidade de Crianças</label>
+                        <input type="number" id="criancas" name="criancas" min="0" max="10" value="0">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="quarto">Tipo de Quarto *</label>
+                        <select id="quarto" name="quarto" required>
+                            <option value="">Selecione a acomodação...</option>
+                            <option value="Standard">Standard (Solteiro / Casal)</option>
+                            <option value="Duplo Standard">Duplo Standard (2 Camas de Casal)</option>
+                            <option value="Suíte Luxo">Suíte Luxo com Vista</option>
+                            <option value="Suíte Familiar">Suíte Familiar (Até 6 Pessoas)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pagamento e Observações -->
+                <h3 class="form-section-title">3. Pagamento & Preferências</h3>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="pagamento">Forma de Pagamento Preferida *</label>
+                        <select id="pagamento" name="pagamento" required>
+                            <option value="">Selecione o método...</option>
+                            <option value="PIX">PIX (5% de Desconto à Vista)</option>
+                            <option value="Cartão de Crédito">Cartão de Crédito (Até 10x sem juros)</option>
+                            <option value="Boleto Bancário">Boleto Bancário</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="observacoes">Observações / Solicitações Especiais</label>
+                        <textarea id="observacoes" name="observacoes" placeholder="Alguma necessidade de acessibilidade, restrição alimentar, cama extra ou preferência de andar?"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Confirmar e Solicitar Reserva</button>
+            </form>
+
+            <div id="successMessage" class="success-message">
+                <h3>✔ Solicitação Enviada com Sucesso!</h3>
+                <p>Obrigado por escolher a <strong>American Dreams Travel</strong>. Enviamos o comprovante e os detalhes para o seu e-mail!</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <strong>American Dreams Travel</strong>. Desenvolvido por <strong>Flávio Fernandes</strong> e <strong>Renan</strong>.</p>
+        <p class="edu-notice">Este site foi criado exclusivamente para fins educacionais.</p>
+    </footer>
+
+    <script>
+        // Script para preencher automaticamente os dados se vierem da URL (Ex: via botão reservar do Hotel ou Pacote)
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const hotelParam = params.get('hotel');
+            const pacoteParam = params.get('pacote');
+
+            if (hotelParam) {
+                const hotelSelect = document.getElementById('hotel');
+                for (let option of hotelSelect.options) {
+                    if (option.value.toLowerCase().includes(hotelParam.toLowerCase())) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            }
+
+            if (pacoteParam) {
+                const pacoteSelect = document.getElementById('pacote');
+                for (let option of pacoteSelect.options) {
+                    if (option.value.toLowerCase().includes(pacoteParam.toLowerCase())) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            }
+        });
+
+        // Simulação do envio do formulário
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Exibe a mensagem de sucesso
+            const successDiv = document.getElementById('successMessage');
+            successDiv.style.display = 'block';
+            
+            // Rola suavemente até a mensagem
+            successDiv.scrollIntoView({ behavior: 'smooth' });
+            
+            // Reseta o formulário
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>

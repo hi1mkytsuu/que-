@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - American Dreams Travel</title>
+    <style>
+        :root {
+            --primary: #0a2540;
+            --accent: #00d4ff;
+            --accent-green: #2e7d32;
+            --bg: #f4f6f8;
+            --text: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Layout em duas colunas */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Informações da Empresa */
+        .company-info {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .info-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.4rem;
+        }
+
+        .info-item strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            background: #eef7ff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Formulário */
+        .contact-form-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            color: #444;
+        }
+
+        input, select, textarea {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-send {
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            flex: 2;
+            transition: background 0.2s;
+        }
+
+        .btn-send:hover {
+            background-color: #236327;
+        }
+
+        .btn-clear {
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            flex: 1;
+            transition: background 0.2s;
+        }
+
+        .btn-clear:hover {
+            background-color: #d0d0d0;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .faq-answer {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* Mensagem de confirmação */
+        .form-message {
+            display: none;
+            background: #e8f5e9;
+            color: var(--accent-green);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #c8e6c9;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+        }
+
+        .edu-notice {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="index.html">American Dreams Travel</a></h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="index.html#destinos">Destinos</a>
+            <a href="hoteis.html">Hotéis</a>
+            <a href="pacotes.html">Pacotes</a>
+            <a href="pagamento.html">Reserva</a>
+            <a href="contato.html" class="active">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title">Fale Conosco</h2>
+        <p class="page-subtitle">Dúvidas, sugestões ou suporte? Nossa equipe está pronta para te atender.</p>
+
+        <div class="contact-container">
+            
+            <!-- Informações da Empresa -->
+            <div class="company-info">
+                <h3 class="info-title">Nossa Agência</h3>
+
+                <div class="info-item">
+                    <strong>📍 Endereço:</strong>
+                    <span>Av. Paulista, 1000 - Bela Vista, São Paulo - SP, 01310-100</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>📞 Telefones:</strong>
+                    <span>(11) 4002-8922 / (11) 98765-4321 (WhatsApp)</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>✉️ E-mail:</strong>
+                    <span>contato@americandreamstravel.com.br</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>🕒 Horário de Atendimento:</strong>
+                    <span>Segunda a Sexta: 08:00 às 19:00<br>Sábados: 09:00 às 14:00</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>🌐 Redes Sociais:</strong>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">Facebook</a>
+                        <a href="#">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulário de Contato -->
+            <div class="contact-form-card">
+                <h3 class="info-title" style="margin-bottom: 1.2rem;">Envie uma Mensagem</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo *</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone / WhatsApp</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assunto">Assunto *</label>
+                        <input type="text" id="assunto" name="assunto" required placeholder="Resumo da sua mensagem">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivo">Motivo do Contato *</label>
+                        <select id="motivo" name="motivo" required>
+                            <option value="">Selecione...</option>
+                            <option value="Dúvidas Gerais">Dúvidas Gerais</option>
+                            <option value="Informações sobre Pacotes">Informações sobre Pacotes</option>
+                            <option value="Suporte à Reserva">Suporte à Reserva</option>
+                            <option value="Elogios ou Reclamações">Elogios ou Reclamações</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" required placeholder="Escreva sua mensagem aqui..."></textarea>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn-send">Enviar Mensagem</button>
+                        <button type="reset" class="btn-clear">Limpar</button>
+                    </div>
+
+                    <div id="formStatus" class="form-message">
+                        ✔ Mensagem enviada com sucesso! Responderemos em breve.
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Perguntas Frequentes (FAQ) -->
+        <div class="faq-section">
+            <h3 class="info-title" style="margin-bottom: 1.5rem;">Perguntas Frequentes (FAQ)</h3>
+
+            <div class="faq-item">
+                <div class="faq-question">1. O visto americano e passaporte estão incluídos nos pacotes?</div>
+                <div class="faq-answer">Não. A emissão do passaporte e do visto americano é de responsabilidade do cliente, mas nossa equipe oferece orientação completa sobre como agendar a entrevista.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">2. Posso personalizar o roteiro de um pacote?</div>
+                <div class="faq-answer">Sim! Nossos pacotes podem ser adaptados com inclusão de dias extras, troca de hotéis ou alteração de passeios conforme sua preferência.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">3. Quais são as formas de pagamento aceitas?</div>
+                <div class="faq-answer">Aceitamos cartão de crédito em até 10x sem juros, PIX com 5% de desconto à vista e boleto bancário parcelado.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">4. O que acontece após o envio do formulário de reserva?</div>
+                <div class="faq-answer">Nossa equipe entrará em contato via e-mail ou WhatsApp para confirmar a disponibilidade da viagem e enviar os detalhes da cobrança.</div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <strong>American Dreams Travel</strong>. Desenvolvido por <strong>Flavio Fernandes</strong> e <strong>Renan</strong>.</p>
+        <p class="edu-notice">Este site foi criado exclusivamente para fins educacionais.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const statusMessage = document.getElementById('formStatus');
+            statusMessage.style.display = 'block';
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>

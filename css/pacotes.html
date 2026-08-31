@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacotes Turísticos - American Dreams Travel</title>
+    <style>
+        :root {
+            --primary: #0a2540;
+            --accent: #00d4ff;
+            --accent-green: #2e7d32;
+            --bg: #f4f6f8;
+            --text: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Card do Pacote */
+        .package-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .package-header {
+            display: flex;
+            flex-wrap: wrap;
+            background: #fff;
+        }
+
+        .package-img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+        }
+
+        .package-info {
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .city-badge {
+            background: #eef7ff;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+        }
+
+        .package-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .detail-item strong {
+            color: var(--primary);
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .detail-item span {
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        /* Seção de Roteiro */
+        .itinerary-section {
+            padding: 0 2rem 2rem;
+        }
+
+        .itinerary-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.4rem;
+            display: inline-block;
+        }
+
+        .itinerary-days {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .day-box {
+            background: #f4f6f8;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .day-box h4 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .day-box p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Preço e Botão */
+        .package-footer {
+            background: #eef7ff;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .price-container .price {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        .price-container .payment-methods {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .btn-reserve {
+            background-color: var(--accent-green);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .btn-reserve:hover {
+            background-color: #236327;
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+        }
+
+        .edu-notice {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="index.html">American Dreams Travel</a></h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="index.html#destinos">Destinos</a>
+            <a href="hoteis.html">Hotéis</a>
+            <a href="pacotes.html" class="active">Pacotes</a>
+            <a href="pagamento.html">Reserva</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title">Pacotes Turísticos Exclusivos</h2>
+        <p class="page-subtitle">Roteiros completos planejados para você aproveitar ao máximo cada momento</p>
+
+        <!-- Pacote 1: Nova York -->
+        <div class="package-card">
+            <div class="package-header">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9" alt="Nova York" class="package-img">
+                <div class="package-info">
+                    <span class="city-badge">Nova York (NY)</span>
+                    <h3 class="package-title">Luzes & Espetáculos em Manhattan</h3>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <strong>Duração:</strong>
+                            <span>5 Dias / 4 Noites</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Hospedagem:</strong>
+                            <span>Manhattan Empire Suites</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Transporte:</strong>
+                            <span>Voo de Ida e Volta + Traslado Aeroporto</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Passeios Incluídos:</strong>
+                            <span>Estátua da Liberdade, Broadway e Central Park</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="itinerary-section">
+                <h4 class="itinerary-title">Roteiro Sugerido</h4>
+                <div class="itinerary-days">
+                    <div class="day-box">
+                        <h4>Dia 1: Chegada & Times Square</h4>
+                        <p>Chegada ao aeroporto, traslado ao hotel e caminhada noturna pelas luzes da Times Square.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 2: Ícones Sociais & Liberdade</h4>
+                        <p>Passeio de barco até a Estátua da Liberdade, Ellis Island e visita ao Wall Street.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 3: Central Park & Broadway</h4>
+                        <p>Manhã explorando o Central Park e noite reservada para um musical no distrito dos teatros.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 4: Empire State & Compras</h4>
+                        <p>Subida ao observatório do Empire State Building e compras ao longo da Fifth Avenue.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="package-footer">
+                <div class="price-container">
+                    <div class="price">R$ 8.500 / por pessoa</div>
+                    <div class="payment-methods">Formas de pagamento: Cartão em até 10x sem juros, PIX com 5% OFF ou Boleto.</div>
+                </div>
+                <a href="pagamento.html?pacote=Luzes & Espetáculos em Manhattan&preco=R$ 8.500" class="btn-reserve">Reservar Pacote</a>
+            </div>
+        </div>
+
+        <!-- Pacote 2: Orlando -->
+        <div class="package-card">
+            <div class="package-header">
+                <img src="https://images.unsplash.com/photo-1597466599360-3b9775841aec?auto=format&fit=crop&w=1000&q=80" alt="Orlando" class="package-img">
+                <div class="package-info">
+                    <span class="city-badge">Orlando (FL)</span>
+                    <h3 class="package-title">Magia & Diversão nos Parques</h3>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <strong>Duração:</strong>
+                            <span>7 Dias / 6 Noites</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Hospedagem:</strong>
+                            <span>Grand Magic Resort</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Transporte:</strong>
+                            <span>Voo + Aluguel de Carro SUV com Seguro</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Passeios Incluídos:</strong>
+                            <span>Ingressos para Magic Kingdom e Universal Studios</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="itinerary-section">
+                <h4 class="itinerary-title">Roteiro Sugerido</h4>
+                <div class="itinerary-days">
+                    <div class="day-box">
+                        <h4>Dia 1: Chegada & Retirada do Carro</h4>
+                        <p>Chegada em Orlando, retirada do veículo e check-in com descanso no resort.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 2: Magic Kingdom</h4>
+                        <p>Dia inteiro dedicado às atrações mágicas e ao show de fogos no Castelo da Cinderela.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 3: Compras & Outlets</h4>
+                        <p>Dia livre para explorar os grandes Outlets Premium e compras na International Drive.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 4: Universal Studios</h4>
+                        <p>Imersão no mundo do cinema e atrações radicais do The Wizarding World of Harry Potter.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="package-footer">
+                <div class="price-container">
+                    <div class="price">R$ 9.200 / por pessoa</div>
+                    <div class="payment-methods">Formas de pagamento: Cartão em até 10x sem juros, PIX com 5% OFF ou Boleto.</div>
+                </div>
+                <a href="pagamento.html?pacote=Magia & Diversão nos Parques&preco=R$ 9.200" class="btn-reserve">Reservar Pacote</a>
+            </div>
+        </div>
+
+        <!-- Pacote 3: Miami -->
+        <div class="package-card">
+            <div class="package-header">
+                <img src="https://images.unsplash.com/photo-1506966953602-c20cc11f75e3" alt="Miami" class="package-img">
+                <div class="package-info">
+                    <span class="city-badge">Miami (FL)</span>
+                    <h3 class="package-title">Praias, Arte & Compras em Miami</h3>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <strong>Duração:</strong>
+                            <span>5 Dias / 4 Noites</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Hospedagem:</strong>
+                            <span>Ocean Drive Beach Resort</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Transporte:</strong>
+                            <span>Voo de Ida e Volta + Traslado Executivo</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Passeios Incluídos:</strong>
+                            <span>Tour Art Déco, Wynwood Walls e Barco em Biscayne Bay</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="itinerary-section">
+                <h4 class="itinerary-title">Roteiro Sugerido</h4>
+                <div class="itinerary-days">
+                    <div class="day-box">
+                        <h4>Dia 1: Chegada & Ocean Drive</h4>
+                        <p>Recepção no aeroporto, check-in no resort à beira-mar e jantar na movimentada Ocean Drive.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 2: South Beach & Arte</h4>
+                        <p>Manhã nas praias cristalinas de South Beach e tarde conhecendo o distrito de arte em Wynwood.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 3: Passeio de Barco & Compras</h4>
+                        <p>Tour de barco vendo mansões de celebridades na baía e compras no Lincoln Road Mall.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 4: Sabor de Little Havana</h4>
+                        <p>Experiência cultural e gastronômica pela Little Havana degustando pratos típicos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="package-footer">
+                <div class="price-container">
+                    <div class="price">R$ 7.800 / por pessoa</div>
+                    <div class="payment-methods">Formas de pagamento: Cartão em até 10x sem juros, PIX com 5% OFF ou Boleto.</div>
+                </div>
+                <a href="pagamento.html?pacote=Praias, Arte & Compras em Miami&preco=R$ 7.800" class="btn-reserve">Reservar Pacote</a>
+            </div>
+        </div>
+
+        <!-- Pacote 4: Los Angeles -->
+        <div class="package-card">
+            <div class="package-header">
+                <img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0" alt="Los Angeles" class="package-img">
+                <div class="package-info">
+                    <span class="city-badge">Los Angeles (CA)</span>
+                    <h3 class="package-title">Estrelas de Hollywood & Costa Caliórniana</h3>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <strong>Duração:</strong>
+                            <span>6 Dias / 5 Noites</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Hospedagem:</strong>
+                            <span>Hollywood Sunset Hotel</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Transporte:</strong>
+                            <span>Voo + Aluguel de Carro Conversível</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Passeios Incluídos:</strong>
+                            <span>Estúdios de Cinema, Observatório Griffith e Píer de Santa Monica</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="itinerary-section">
+                <h4 class="itinerary-title">Roteiro Sugerido</h4>
+                <div class="itinerary-days">
+                    <div class="day-box">
+                        <h4>Dia 1: Chegada em L.A.</h4>
+                        <p>Chegada à Califórnia, retirada do veículo e brinde de boas-vindas no hotel.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 2: Calçada da Fama & Estúdios</h4>
+                        <p>Caminhada pela Calçada da Fama e tour guiado por bastidores de gravações de filmes.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 3: Observatório & Por do Sol</h4>
+                        <p>Visita ao Observatório Griffith com vista estonteante para o letreiro de Hollywood.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 4: Santa Monica & Venice Beach</h4>
+                        <p>Dia de praia aproveitando o famoso Píer de Santa Monica e a cultura de Venice Beach.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="package-footer">
+                <div class="price-container">
+                    <div class="price">R$ 8.900 / por pessoa</div>
+                    <div class="payment-methods">Formas de pagamento: Cartão em até 10x sem juros, PIX com 5% OFF ou Boleto.</div>
+                </div>
+                <a href="pagamento.html?pacote=Estrelas de Hollywood & Costa Californiana&preco=R$ 8.900" class="btn-reserve">Reservar Pacote</a>
+            </div>
+        </div>
+
+        <!-- Pacote 5: Las Vegas -->
+        <div class="package-card">
+            <div class="package-header">
+                <img src="https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d" alt="Las Vegas" class="package-img">
+                <div class="package-info">
+                    <span class="city-badge">Las Vegas (NV)</span>
+                    <h3 class="package-title">Luzes, Cassinos & Grand Canyon</h3>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <strong>Duração:</strong>
+                            <span>4 Dias / 3 Noites</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Hospedagem:</strong>
+                            <span>The Neon Strip Palace</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Transporte:</strong>
+                            <span>Voo de Ida e Volta + Limousine Aeroporto/Hotel</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Passeios Incluídos:</strong>
+                            <span>Show Cirque du Soleil e Excursão de Helicóptero ao Grand Canyon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="itinerary-section">
+                <h4 class="itinerary-title">Roteiro Sugerido</h4>
+                <div class="itinerary-days">
+                    <div class="day-box">
+                        <h4>Dia 1: Chegada de Luxo na Strip</h4>
+                        <p>Traslado de limousine, check-in no cassino e passeio para ver as Fontes do Bellagio.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 2: Helicóptero no Grand Canyon</h4>
+                        <p>Voo panorâmico sobre o deserto até o Grand Canyon com brinde de champagne.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 3: Fremont Street & Espetáculo</h4>
+                        <p>Passeio por Vegas Antiga na Fremont Street e ingressos VIP para o Cirque du Soleil.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 4: Compras & Despedida</h4>
+                        <p>Manhã de compras no Forum Shops do Caesars Palace antes do voo de retorno.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="package-footer">
+                <div class="price-container">
+                    <div class="price">R$ 7.500 / por pessoa</div>
+                    <div class="payment-methods">Formas de pagamento: Cartão em até 10x sem juros, PIX com 5% OFF ou Boleto.</div>
+                </div>
+                <a href="pagamento.html?pacote=Luzes, Cassinos & Grand Canyon&preco=R$ 7.500" class="btn-reserve">Reservar Pacote</a>
+            </div>
+        </div>
+
+        <!-- Pacote 6: Washington DC -->
+        <div class="package-card">
+            <div class="package-header">
+                <img src="https://images.unsplash.com/photo-1617581629397-a72507c3de9e" alt="Washington DC" class="package-img">
+                <div class="package-info">
+                    <span class="city-badge">Washington DC (DC)</span>
+                    <h3 class="package-title">História & Monumentos Capitais</h3>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <strong>Duração:</strong>
+                            <span>4 Dias / 3 Noites</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Hospedagem:</strong>
+                            <span>Capitol Heritage Plaza</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Transporte:</strong>
+                            <span>Voo de Ida e Volta + Passe de Metrô ilimitado</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Passeios Incluídos:</strong>
+                            <span>Tour guiado pelo National Mall, Capitólio e Museus Smithsonian</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="itinerary-section">
+                <h4 class="itinerary-title">Roteiro Sugerido</h4>
+                <div class="itinerary-days">
+                    <div class="day-box">
+                        <h4>Dia 1: Chegada & Primeiro Olhar</h4>
+                        <p>Acomodação no hotel e caminhada ao redor do Capitólio dos Estados Unidos.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 2: Rota dos Monumentos</h4>
+                        <p>Visita guiada ao Lincoln Memorial, Washington Monument e os memoriais de guerra.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 3: Museus Smithsonian</h4>
+                        <p>Exploração do Museu do Ar e Espaço e do Museu de História Natural.</p>
+                    </div>
+                    <div class="day-box">
+                        <h4>Dia 4: Casa Branca & Georgetown</h4>
+                        <p>Parada fotográfica na Casa Branca e passeio pelo charmoso bairro de Georgetown.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="package-footer">
+                <div class="price-container">
+                    <div class="price">R$ 7.200 / por pessoa</div>
+                    <div class="payment-methods">Formas de pagamento: Cartão em até 10x sem juros, PIX com 5% OFF ou Boleto.</div>
+                </div>
+                <a href="pagamento.html?pacote=História & Monumentos Capitais&preco=R$ 7.200" class="btn-reserve">Reservar Pacote</a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <strong>American Dreams Travel</strong>. Desenvolvido por <strong>Flávio Fernandes</strong> e <strong>Renan</strong>.</p>
+        <p class="edu-notice">Este site foi criado exclusivamente para fins educacionais.</p>
+    </footer>
+
+</body>
+</html>
